@@ -1,0 +1,262 @@
+<b></b>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Proposal 💖</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    background: pink;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  /* Background bubbles and flowers */
+  .bubble, .flower {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 10s linear infinite;
+  }
+
+  .flower {
+    width: 20px;
+    height: 20px;
+    background: url('https://i.imgur.com/ef7YcR0.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 0;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); }
+    100% { transform: translateY(-50px) translateX(50px); }
+  }
+
+  h1, p {
+    font-size: 2rem;
+    color: #e60073;
+    text-shadow: 2px 2px 5px #fff;
+  }
+
+  .hidden { display: none; }
+
+  .arrow {
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 20px;
+    user-select: none;
+    transition: 0.3s;
+  }
+
+  .arrow:hover {
+    transform: scale(1.2);
+    color: #ff3399;
+  }
+
+  .button-container {
+    margin-top: 20px;
+  }
+
+  button {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    padding: 10px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 10px #ff66b2;
+  }
+
+  button:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #ff66b2;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    opacity: 0.8;
+    animation: confetti-fall 3s linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Cat & Dog Hugging GIF overlay */
+  #hug {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    z-index: 999;
+  }
+
+  /* Text typewriter effect */
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 0.15em solid #e60073;
+    white-space: nowrap;
+    animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #e60073; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Music -->
+<audio id="bg-music" autoplay loop>
+  <source src="photograph.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Background bubbles & flowers -->
+<script>
+for(let i=0;i<30;i++){
+  let bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.style.width = bubble.style.height = Math.random()*20 + 10 + 'px';
+  bubble.style.left = Math.random()*100 + 'vw';
+  bubble.style.animationDuration = Math.random()*5+5+'s';
+  bubble.style.background = 'rgba(255,255,255,0.5)';
+  document.body.appendChild(bubble);
+}
+
+for(let i=0;i<10;i++){
+  let flower = document.createElement('div');
+  flower.className = 'flower';
+  flower.style.left = Math.random()*100 + 'vw';
+  flower.style.animationDuration = Math.random()*7+5+'s';
+  document.body.appendChild(flower);
+}
+</script>
+
+<div id="content">
+  <h1 id="line" class="typewriter"></h1>
+  <div>
+    <span class="arrow" id="prev">&#8592;</span>
+    <span class="arrow" id="next">&#8594;</span>
+  </div>
+  <div class="button-container hidden" id="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😭</button>
+  </div>
+</div>
+
+<!-- Hug GIF placeholder -->
+<img id="hug" class="hidden" src="https://i.imgur.com/1gQ3G0R.gif" alt="Cat & Dog Hugging">
+
+<script>
+const lines = [
+"Happy Valentine’s Day, my heart’s delight 💖",
+"In this little space, I choose to write…",
+"A question whispered soft and true,",
+"From my heart, straight to you.",
+"Every moment with you feels so right,",
+"Your smile turns darkness into light.",
+"With you, my world feels new,",
+"Every dream I have includes you.",
+"So here I stand, with all I am too,",
+"Will you be my girlfriend… me and you? 💍"
+];
+
+let current = 0;
+const lineEl = document.getElementById('line');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const buttons = document.getElementById('buttons');
+const yesBtn = document.getElementById('yes');
+const noBtn = document.getElementById('no');
+const hug = document.getElementById('hug');
+const music = document.getElementById('bg-music');
+
+function showLine(index){
+  if(index<0) index=0;
+  if(index>=lines.length) index=lines.length-1;
+  lineEl.textContent = "";
+  let text = lines[index];
+  let i=0;
+  lineEl.classList.remove('typewriter');
+  void lineEl.offsetWidth; // restart animation
+  lineEl.classList.add('typewriter');
+  function type(){
+    if(i<text.length){
+      lineEl.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 100);
+    } else {
+      if(index===lines.length-1){
+        buttons.classList.remove('hidden');
+      } else {
+        buttons.classList.add('hidden');
+      }
+    }
+  }
+  type();
+}
+
+prevBtn.onclick = ()=>{
+  if(current>0) current--;
+  showLine(current);
+}
+
+nextBtn.onclick = ()=>{
+  if(current<lines.length-1) current++;
+  showLine(current);
+}
+
+// NO button
+noBtn.onclick = ()=>{
+  lineEl.textContent = "😭😭😭";
+  buttons.classList.add('hidden');
+  setTimeout(()=>{window.close()},2000);
+}
+
+// YES button
+yesBtn.onclick = ()=>{
+  buttons.classList.add('hidden');
+  hug.classList.remove('hidden');
+  for(let i=0;i<100;i++){
+    let c = document.createElement('div');
+    c.className='confetti';
+    c.style.left = Math.random()*100+'vw';
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>{c.remove()},3000);
+  }
+}
+
+showLine(current);
+</script>
+
+</body>
+</html>
