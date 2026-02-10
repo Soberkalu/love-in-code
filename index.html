@@ -1,4 +1,3 @@
-<b></b>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,82 +7,47 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap');
 
-  body {
+  body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: 'Pacifico', cursive;
-    background: pink;
     overflow: hidden;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    text-align: center;
+    background: black;
   }
 
-  /* Background bubbles and flowers */
-  .bubble, .flower {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: float 10s linear infinite;
-  }
-
-  #flower-animation {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw;      /* responsive width */
-  height: auto;     /* keeps aspect ratio */
-  max-height: 80vh; /* ensures it doesn’t overflow */
-  z-index: 1000;
-  pointer-events: none;
-}
-
-  @keyframes float {
-    0% { transform: translateY(100vh) translateX(0); }
-    100% { transform: translateY(-50px) translateX(50px); }
+  /* Video background */
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
   }
 
   h1, p {
-    font-size: 18px;
-    color: #e60073;
-    text-shadow: 2px 2px 5px #fff;
+    font-size: 20px;
+    color: #ff6699;
+    text-shadow: 2px 2px 5px #000;
   }
 
   .hidden { display: none; }
 
   .arrow {
-  font-size: 2rem;         /* bigger but sleek */
-  color: #ff3366;          /* matches pink theme */
-  cursor: pointer;
-  user-select: none;
-  padding: 0 20px;
-  transition: transform 0.2s ease;
-}
-
-  <iframe 
-    id="background-music"
-    width="0" 
-    height="0" 
-    src="https://www.youtube.com/embed/fN9jsFdsc7o?autoplay=1&loop=1&playlist=fN9jsFdsc7o" 
-    frameborder="0" 
-    allow="autoplay; encrypted-media" 
-    allowfullscreen>
-  </iframe>
-
-  <!-- Optional: Start button for mobile autoplay -->
-  <button id="startButton">Tap to Start Music 💖</button>
-
-  <!-- Your proposal content here -->
-  <div id="proposal-container">
-    <!-- Animated text, arrows, flowers, etc. -->
-  </div>
-
-.arrow:hover {
-  transform: scale(1.2);
-}
+    font-size: 2rem;
+    color: #ff3366;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 20px;
+    transition: transform 0.2s ease;
+  }
+  .arrow:hover { transform: scale(1.2); }
 
   .button-container {
     margin-top: 20px;
@@ -100,7 +64,6 @@
     transition: 0.5s;
     box-shadow: 0 0 10px #ff66b2;
   }
-
   button:hover {
     transform: scale(1.2);
     box-shadow: 0 0 20px #ff66b2;
@@ -111,11 +74,9 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: red;
     opacity: 0.8;
     animation: confetti-fall 3s linear forwards;
   }
-
   @keyframes confetti-fall {
     0% { transform: translateY(0) rotate(0deg); }
     100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
@@ -136,24 +97,23 @@
   .typewriter {
     display: inline-block;
     overflow: hidden;
-    border-right: 0.15em solid #e60073;
+    border-right: 0.15em solid #ff3366;
     white-space: nowrap;
     animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
   }
 
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  @keyframes blink {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: #e60073; }
-  }
+  @keyframes typing { from { width: 0; } to { width: 100%; } }
+  @keyframes blink { 0%,100% { border-color: transparent; } 50% { border-color: #ff3366; } }
 
 </style>
 </head>
 <body>
+
+<!-- Video Background -->
+<video id="bg-video" autoplay muted loop>
+  <source src="garden_love.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 <!-- Music -->
 <audio id="bg-music" autoplay loop>
@@ -161,33 +121,12 @@
   Your browser does not support the audio element.
 </audio>
 
-<!-- Background bubbles & flowers -->
-<script>
-for(let i=0;i<30;i++){
-  let bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.style.width = bubble.style.height = Math.random()*20 + 10 + 'px';
-  bubble.style.left = Math.random()*100 + 'vw';
-  bubble.style.animationDuration = Math.random()*5+5+'s';
-  bubble.style.background = 'rgba(255,255,255,0.5)';
-  document.body.appendChild(bubble);
-}
-
-for(let i=0;i<10;i++){
-  let flower = document.createElement('div');
-  flower.className = 'flower';
-  flower.style.left = Math.random()*100 + 'vw';
-  flower.style.animationDuration = Math.random()*7+5+'s';
-  document.body.appendChild(flower);
-}
-</script>
-
 <div id="content">
   <h1 id="line" class="typewriter"></h1>
   <div class="navigation">
-  <span id="prev" class="arrow">&#10094;</span> <!-- Left arrow -->
-  <span id="next" class="arrow">&#10095;</span> <!-- Right arrow -->
-</div>
+    <span id="prev" class="arrow">&#10094;</span>
+    <span id="next" class="arrow">&#10095;</span>
+  </div>
   <div class="button-container hidden" id="buttons">
     <button id="yes">Yes 💖</button>
     <button id="no">No 😭</button>
@@ -199,16 +138,16 @@ for(let i=0;i<10;i++){
 
 <script>
 const lines = [
-"Happy Valentine’s Day, my heart’s delight 💖",
-"In this little space, I choose to write…",
-"A question whispered soft and true,",
-"From my heart, straight to you.",
-"Every moment with you feels so right,",
-"Your smile turns darkness into light.",
-"With you, my world feels new,",
-"Every dream I have includes you.",
-"So here I stand, with all I am too,",
-"Will you be my girlfriend… me and you? 💍"
+  "Happy Valentine’s Day, my heart’s delight 💖",
+  "In this little space, I choose to write…",
+  "A question whispered soft and true,",
+  "From my heart, straight to you.",
+  "Every moment with you feels so right",
+  "Your smile turns darkness into light.",
+  "With you, my world feels new",
+  "Every dream I have includes you.",
+  "So here I stand, with all I am too",
+  "Will you be my girlfriend… me and you? 💍"
 ];
 
 let current = 0;
@@ -219,7 +158,6 @@ const buttons = document.getElementById('buttons');
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
 const hug = document.getElementById('hug');
-const music = document.getElementById('bg-music');
 
 function showLine(index){
   if(index<0) index=0;
@@ -228,7 +166,7 @@ function showLine(index){
   let text = lines[index];
   let i=0;
   lineEl.classList.remove('typewriter');
-  void lineEl.offsetWidth; // restart animation
+  void lineEl.offsetWidth;
   lineEl.classList.add('typewriter');
   function type(){
     if(i<text.length){
@@ -246,15 +184,8 @@ function showLine(index){
   type();
 }
 
-prevBtn.onclick = ()=>{
-  if(current>0) current--;
-  showLine(current);
-}
-
-nextBtn.onclick = ()=>{
-  if(current<lines.length-1) current++;
-  showLine(current);
-}
+prevBtn.onclick = ()=>{ if(current>0) current--; showLine(current); }
+nextBtn.onclick = ()=>{ if(current<lines.length-1) current++; showLine(current); }
 
 // NO button
 noBtn.onclick = ()=>{
