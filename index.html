@@ -29,13 +29,17 @@
     animation: float 10s linear infinite;
   }
 
-  .flower {
-    width: 20px;
-    height: 20px;
-    background: url('https://i.imgur.com/ef7YcR0.png') no-repeat center center;
-    background-size: cover;
-    border-radius: 0;
-  }
+  #flower-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;      /* responsive width */
+  height: auto;     /* keeps aspect ratio */
+  max-height: 80vh; /* ensures it doesn’t overflow */
+  z-index: 1000;
+  pointer-events: none;
+}
 
   @keyframes float {
     0% { transform: translateY(100vh) translateX(0); }
@@ -51,17 +55,17 @@
   .hidden { display: none; }
 
   .arrow {
-    font-size: 2rem;
-    cursor: pointer;
-    margin: 20px;
-    user-select: none;
-    transition: 0.3s;
-  }
+  font-size: 2rem;         /* bigger but sleek */
+  color: #ff3366;          /* matches pink theme */
+  cursor: pointer;
+  user-select: none;
+  padding: 0 20px;
+  transition: transform 0.2s ease;
+}
 
-  .arrow:hover {
-    transform: scale(1.2);
-    color: #ff3399;
-  }
+.arrow:hover {
+  transform: scale(1.2);
+}
 
   .button-container {
     margin-top: 20px;
@@ -162,10 +166,10 @@ for(let i=0;i<10;i++){
 
 <div id="content">
   <h1 id="line" class="typewriter"></h1>
-  <div>
-    <span class="arrow" id="prev">&#8592;</span>
-    <span class="arrow" id="next">&#8594;</span>
-  </div>
+  <div class="navigation">
+  <span id="prev" class="arrow">&#10094;</span> <!-- Left arrow -->
+  <span id="next" class="arrow">&#10095;</span> <!-- Right arrow -->
+</div>
   <div class="button-container hidden" id="buttons">
     <button id="yes">Yes 💖</button>
     <button id="no">No 😭</button>
