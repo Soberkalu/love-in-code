@@ -1,215 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine's Proposal 💖</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap');
-
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Pacifico', cursive;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: black;
-  }
-
-  /* Video background */
-  #bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-
-  h1, p {
-    font-size: 20px;
-    color: #ff6699;
-    text-shadow: 2px 2px 5px #000;
-  }
-
-  .hidden { display: none; }
-
-  .arrow {
-    font-size: 2rem;
-    color: #ff3366;
-    cursor: pointer;
-    user-select: none;
-    padding: 0 20px;
-    transition: transform 0.2s ease;
-  }
-  .arrow:hover { transform: scale(1.2); }
-
-  .button-container {
-    margin-top: 20px;
-  }
-
-  button {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    padding: 10px 30px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.5s;
-    box-shadow: 0 0 10px #ff66b2;
-  }
-  button:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px #ff66b2;
-  }
-
-  /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    opacity: 0.8;
-    animation: confetti-fall 3s linear forwards;
-  }
-  @keyframes confetti-fall {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-  }
-
-  /* Cat & Dog Hugging GIF overlay */
-  #hug {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    z-index: 999;
-  }
-
-  /* Text typewriter effect */
-  .typewriter {
-    display: inline-block;
-    overflow: hidden;
-    border-right: 0.15em solid #ff3366;
-    white-space: nowrap;
-    animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
-  }
-
-  @keyframes typing { from { width: 0; } to { width: 100%; } }
-  @keyframes blink { 0%,100% { border-color: transparent; } 50% { border-color: #ff3366; } }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love in Code</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Video Background -->
-<video id="bg-video" autoplay muted loop>
-  <source src="garden_love.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-<!-- Music -->
-<audio id="bg-music" autoplay loop>
-  <source src="photograph.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<div id="content">
-  <h1 id="line" class="typewriter"></h1>
-  <div class="navigation">
-    <span id="prev" class="arrow">&#10094;</span>
-    <span id="next" class="arrow">&#10095;</span>
-  </div>
-  <div class="button-container hidden" id="buttons">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 😭</button>
-  </div>
-</div>
-
-<!-- Hug GIF placeholder -->
-<img id="hug" class="hidden" src="https://i.imgur.com/1gQ3G0R.gif" alt="Cat & Dog Hugging">
-
-<script>
-const lines = [
-  "Happy Valentine’s Day, my heart’s delight 💖",
-  "In this little space, I choose to write…",
-  "A question whispered soft and true,",
-  "From my heart, straight to you.",
-  "Every moment with you feels so right",
-  "Your smile turns darkness into light.",
-  "With you, my world feels new",
-  "Every dream I have includes you.",
-  "So here I stand, with all I am too",
-  "Will you be my girlfriend… me and you? 💍"
-];
-
-let current = 0;
-const lineEl = document.getElementById('line');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const buttons = document.getElementById('buttons');
-const yesBtn = document.getElementById('yes');
-const noBtn = document.getElementById('no');
-const hug = document.getElementById('hug');
-
-function showLine(index){
-  if(index<0) index=0;
-  if(index>=lines.length) index=lines.length-1;
-  lineEl.textContent = "";
-  let text = lines[index];
-  let i=0;
-  lineEl.classList.remove('typewriter');
-  void lineEl.offsetWidth;
-  lineEl.classList.add('typewriter');
-  function type(){
-    if(i<text.length){
-      lineEl.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, 100);
-    } else {
-      if(index===lines.length-1){
-        buttons.classList.remove('hidden');
-      } else {
-        buttons.classList.add('hidden');
-      }
-    }
-  }
-  type();
-}
-
-prevBtn.onclick = ()=>{ if(current>0) current--; showLine(current); }
-nextBtn.onclick = ()=>{ if(current<lines.length-1) current++; showLine(current); }
-
-// NO button
-noBtn.onclick = ()=>{
-  lineEl.textContent = "😭😭😭";
-  buttons.classList.add('hidden');
-  setTimeout(()=>{window.close()},2000);
-}
-
-// YES button
-yesBtn.onclick = ()=>{
-  buttons.classList.add('hidden');
-  hug.classList.remove('hidden');
-  for(let i=0;i<100;i++){
-    let c = document.createElement('div');
-    c.className='confetti';
-    c.style.left = Math.random()*100+'vw';
-    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-    setTimeout(()=>{c.remove()},3000);
-  }
-}
-
-showLine(current);
-</script>
-
+    <div class="video-background">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/fQWhenQgXo8?autoplay=1&mute=1&loop=1&playlist=fQWhenQgXo8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <h1>Welcome to Love in Code!</h1>
 </body>
 </html>
