@@ -83,15 +83,45 @@
   }
 
   /* Cat & Dog Hugging GIF overlay */
-  #hug {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    z-index: 999;
+  #success {
+  animation: popIn 1s ease forwards;
+}
+
+#congrats {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #ff99cc;
+  text-shadow: 0 0 20px #ff66b2, 0 0 40px #ff3399;
+}
+
+#love-quote {
+  font-size: 1.3rem;
+  color: white;
+  max-width: 90vw;
+  margin: auto;
+  text-shadow: 0 0 10px #000;
+}
+
+.spark {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: gold;
+  border-radius: 50%;
+  animation: sparkFly 1.2s linear forwards;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.3); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes sparkFly {
+  to {
+    transform: translate(var(--x), var(--y));
+    opacity: 0;
   }
+}
 
   /* Text typewriter effect */
   .typewriter {
@@ -131,7 +161,13 @@
 </div>
 
 <!-- Hug GIF placeholder -->
-<img id="hug" class="hidden" src="https://i.imgur.com/1gQ3G0R.gif" alt="Cat & Dog Hugging">
+<div id="success" class="hidden">
+  <h1 id="congrats">Congratulations 💖</h1>
+  <p id="love-quote">
+    You are not just my choice — you are my answered prayer,
+    my peace, my favorite place to belong. 🥹💕
+  </p>
+</div>
 
 <script>
 const lines = [
@@ -154,7 +190,7 @@ const nextBtn = document.getElementById('next');
 const buttons = document.getElementById('buttons');
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
-const hug = document.getElementById('hug');
+const success = document.getElementById('success');
 
 function showLine(index){
   if(index<0) index=0;
@@ -194,14 +230,30 @@ noBtn.onclick = ()=>{
 // YES button
 yesBtn.onclick = ()=>{
   buttons.classList.add('hidden');
-  hug.classList.remove('hidden');
-  for(let i=0;i<100;i++){
+  lineEl.classList.add('hidden');
+  document.querySelector('.navigation').classList.add('hidden');
+  success.classList.remove('hidden');
+
+  // confetti
+  for(let i=0;i<120;i++){
     let c = document.createElement('div');
     c.className='confetti';
     c.style.left = Math.random()*100+'vw';
     c.style.background = `hsl(${Math.random()*360},100%,50%)`;
     document.body.appendChild(c);
-    setTimeout(()=>{c.remove()},3000);
+    setTimeout(()=>c.remove(),3000);
+  }
+
+  // spark burst
+  for(let i=0;i<60;i++){
+    let s = document.createElement('div');
+    s.className = 'spark';
+    s.style.left = '50vw';
+    s.style.top = '50vh';
+    s.style.setProperty('--x', (Math.random()*600-300)+'px');
+    s.style.setProperty('--y', (Math.random()*600-300)+'px');
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1200);
   }
 }
 
