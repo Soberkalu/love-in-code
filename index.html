@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+no<!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
@@ -161,12 +161,18 @@
 </div>
 
 <!-- Hug GIF placeholder -->
-<div id="success" class="hidden">
-  <h1 id="congrats">Congratulations 💖</h1>
-  <p id="love-quote">
-    You are not just my choice — you are my answered prayer,
-    my peace, my favorite place to belong. 🥹💕
-  </p>
+<div id="introPage">
+  <div id="message">
+    🎉 Congratulations! 🎉<br>
+    "You have my heart, forever and always." 💖
+  </div>
+  <button id="yesBtn">Yes 💖</button>
+</div>
+
+<div id="finalPage" class="hidden">
+  <div id="finalMessage">
+    "Together, our hearts are unstoppable 💖✨"
+  </div>
 </div>
 
 <script>
@@ -188,9 +194,10 @@ const lineEl = document.getElementById('line');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const buttons = document.getElementById('buttons');
-const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
-const success = document.getElementById('success');
+const yesBtn = document.getElementById('yesBtn')
+const introPage = document.getElementById('introPage');
+const finalPage = document.getElementById('finalPage');
 
 function showLine(index){
   if(index<0) index=0;
@@ -228,32 +235,18 @@ noBtn.onclick = ()=>{
 }
 
 // YES button
-yesBtn.onclick = ()=>{
-  buttons.classList.add('hidden');
-  lineEl.classList.add('hidden');
-  document.querySelector('.navigation').classList.add('hidden');
-  success.classList.remove('hidden');
+yesBtn.onclick = () => {
+  introPage.style.display = 'none'; // remove first page
+  finalPage.classList.remove('hidden'); // show second page
 
-  // confetti
-  for(let i=0;i<120;i++){
+  // Confetti
+  for(let i=0;i<100;i++){
     let c = document.createElement('div');
     c.className='confetti';
     c.style.left = Math.random()*100+'vw';
     c.style.background = `hsl(${Math.random()*360},100%,50%)`;
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
-
-  // spark burst
-  for(let i=0;i<60;i++){
-    let s = document.createElement('div');
-    s.className = 'spark';
-    s.style.left = '50vw';
-    s.style.top = '50vh';
-    s.style.setProperty('--x', (Math.random()*600-300)+'px');
-    s.style.setProperty('--y', (Math.random()*600-300)+'px');
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1200);
+    setTimeout(()=>{c.remove()},3000);
   }
 }
 
