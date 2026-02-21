@@ -1,267 +1,120 @@
-no<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine's Proposal 💖</title>
+<meta charset="UTF-8">
+<title>Will You Be My Girlfriend?</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap');
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
 
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Pacifico', cursive;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-  }
+    .container {
+        max-width: 600px;
+    }
 
-  /* Video background */
-  #bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
+    .emoji {
+        font-size: 90px;
+    }
 
-  h1, p {
-    font-size: 20px;
-    color: #ff6699;
-    text-shadow: 2px 2px 5px #000;
-  }
+    h1 {
+        margin-top: 10px;
+        font-size: 28px;
+    }
 
-  .hidden { display: none; }
+    .buttons {
+        margin-top: 30px;
+        position: relative;
+    }
 
-  .arrow {
-    font-size: 2rem;
-    color: #ff3366;
-    cursor: pointer;
-    user-select: none;
-    padding: 0 20px;
-    transition: transform 0.2s ease;
-  }
-  .arrow:hover { transform: scale(1.2); }
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-  .button-container {
-    margin-top: 20px;
-  }
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+    }
 
-  button {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    padding: 10px 30px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.5s;
-    box-shadow: 0 0 10px #ff66b2;
-  }
-  button:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px #ff66b2;
-  }
+    #noBtn {
+        background: #ccc;
+        color: black;
+        margin-left: 15px;
+        position: relative;
+    }
 
-  /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    opacity: 0.8;
-    animation: confetti-fall 3s linear forwards;
-  }
-  @keyframes confetti-fall {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-  }
-
-  /* Cat & Dog Hugging GIF overlay */
-  #success {
-  animation: popIn 1s ease forwards;
-   justify-content: center;
-     text-align: center;
-}
-
-#congrats {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3rem;
-  color: #ff99cc;
-  text-shadow: 0 0 20px #ff66b2, 0 0 40px #ff3399;
-   text-align: center;
-}
-
-#love-quote {
-  font-size: 1.3rem;
-  color: white;
-  max-width: 90vw;
-  margin: auto;
-  text-shadow: 0 0 10px #000;
-   text-align: center;
-}
-
-.spark {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: gold;
-  border-radius: 50%;
-  animation: sparkFly 1.2s linear forwards;
-}
-
-@keyframes popIn {
-  from { transform: scale(0.3); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes sparkFly {
-  to {
-    transform: translate(var(--x), var(--y));
-    opacity: 0;
-  }
-}
-
-  /* Text typewriter effect */
-  .typewriter {
-    display: inline-block;
-    overflow: hidden;
-    border-right: 0.15em solid #ff3366;
-    white-space: nowrap;
-    animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
-  }
-
-  @keyframes typing { from { width: 0; } to { width: 100%; } }
-  @keyframes blink { 0%,100% { border-color: transparent; } 50% { border-color: #ff3366; } }
-
+    .success {
+        font-size: 32px;
+        color: #ff4d6d;
+        font-weight: bold;
+        margin-top: 20px;
+    }
 </style>
 </head>
+
 <body>
 
-<!-- YouTube Video Background -->
-<iframe id="bg-video" src="https://www.youtube.com/embed/fQWhenQgXo8?autoplay=1&loop=1&playlist=fQWhenQgXo8&controls=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="container" id="mainBox">
+    <div class="emoji">👶💖</div>
+    <h1>Will you be my girlfriend?</h1>
 
-<!-- Music -->
-<audio id="bg-music" autoplay loop>
-  <source src="photograph.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<div id="content">
-  <h1 id="line" class="typewriter"></h1>
-  <div class="navigation">
-    <span id="prev" class="arrow">&#10094;</span>
-    <span id="next" class="arrow">&#10095;</span>
-  </div>
-  <div class="button-container hidden" id="buttons">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 😭</button>
-  </div>
-</div>
-
-<!-- Hug GIF placeholder -->
-<div id="success" class="hidden">
-  <h1 id="congrats">Congratulations 💖</h1>
-  <p id="love-quote">
-    You are not just my choice — you are my answered prayer,
-    my peace, my favorite place to belong. 🥹💕
-  </p>
+    <div class="buttons">
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
+    </div>
 </div>
 
 <script>
-const lines = [
-  "Happy Valentine's Day, my heart's delight 💖",
-  "In this little space, I choose to write…",
-  "A question whispered soft and true,",
-  "From my heart, straight to you.",
-  "Every moment with you feels so right",
-  "Your smile turns darkness into light.",
-  "With you, my world feels new",
-  "Every dream I have includes you.",
-  "So here I stand, with all I am too",
-  "Will you be my girlfriend… me and you? 💍"
-];
+let yesBtn = document.getElementById("yesBtn");
+let noBtn = document.getElementById("noBtn");
+let mainBox = document.getElementById("mainBox");
 
-let current = 0;
-const lineEl = document.getElementById('line');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const buttons = document.getElementById('buttons');
-const yesBtn = document.getElementById('yes');
-const noBtn = document.getElementById('no');
-const success = document.getElementById('success');
+let yesSize = 20;
 
-function showLine(index){
-  if(index<0) index=0;
-  if(index>=lines.length) index=lines.length-1;
-  lineEl.textContent = "";
-  let text = lines[index];
-  let i=0;
-  lineEl.classList.remove('typewriter');
-  void lineEl.offsetWidth;
-  lineEl.classList.add('typewriter');
-  function type(){
-    if(i<text.length){
-      lineEl.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, 100);
-    } else {
-      if(index===lines.length-1){
-        buttons.classList.remove('hidden');
-      } else {
-        buttons.classList.add('hidden');
-      }
+yesBtn.onclick = () => {
+    mainBox.innerHTML = `
+        <div class="emoji">💍💖</div>
+        <div class="success">
+            Congratulations 🎉<br>
+            You are now my girlfriend 😍
+        </div>
+    `;
+};
+
+noBtn.onclick = () => {
+    // Increase YES button size
+    yesSize += 15;
+    yesBtn.style.fontSize = yesSize + "px";
+    yesBtn.style.padding = (yesSize/2) + "px " + yesSize + "px";
+
+    // Move NO button randomly
+    let x = Math.random() * 300 - 150;
+    let y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    // Shrink NO button
+    let current = parseInt(window.getComputedStyle(noBtn).fontSize);
+    if (current > 8) {
+        noBtn.style.fontSize = (current - 2) + "px";
     }
-  }
-  type();
-}
 
-prevBtn.onclick = ()=>{ if(current>0) current--; showLine(current); }
-nextBtn.onclick = ()=>{ if(current<lines.length-1) current++; showLine(current); }
-
-// NO button
-noBtn.onclick = ()=>{
-  lineEl.textContent = "😭😭😭";
-  buttons.classList.add('hidden');
-  setTimeout(()=>{window.close()},2000);
-}
-
-// YES button
-yesBtn.onclick = ()=>{
-  buttons.classList.add('hidden');
-  lineEl.classList.add('hidden');
-  document.querySelector('.navigation').classList.add('hidden');
-  success.classList.remove('hidden');
-
-  // confetti
-  for(let i=0;i<120;i++){
-    let c = document.createElement('div');
-    c.className='confetti';
-    c.style.left = Math.random()*100+'vw';
-    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
-
-  // spark burst
-  for(let i=0;i<60;i++){
-    let s = document.createElement('div');
-    s.className = 'spark';
-    s.style.left = '50vw';
-    s.style.top = '50vh';
-    s.style.setProperty('--x', (Math.random()*600-300)+'px');
-    s.style.setProperty('--y', (Math.random()*600-300)+'px');
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1200);
-  }
-}
-
-showLine(current);
+    // If YES becomes huge → auto accept
+    if (yesSize > 120) {
+        yesBtn.click();
+    }
+};
 </script>
 
 </body>
